@@ -1,0 +1,289 @@
+/*
+ * DESIGN PHILOSOPHY: Dark Editorial — Revista de Arte Contemporânea
+ * Fundo escuro profundo, tipografia branca de alto contraste,
+ * acentos em laranja/âmbar (referência ao eclipse solar),
+ * layout de coluna única com ritmo vertical forte.
+ * Fontes: Space Grotesk (display) + DM Sans (body) + Fira Code (mono)
+ */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Custom design tokens */
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+  --font-mono: "Fira Code", monospace;
+}
+
+:root {
+  --radius: 0.375rem;
+
+  /* Dark Editorial Palette */
+  --background: oklch(0.11 0.012 260);
+  --foreground: oklch(0.96 0.005 260);
+  --card: oklch(0.15 0.012 260);
+  --card-foreground: oklch(0.96 0.005 260);
+  --popover: oklch(0.15 0.012 260);
+  --popover-foreground: oklch(0.96 0.005 260);
+
+  /* Orange/amber accent — eclipse reference */
+  --primary: oklch(0.72 0.19 55);
+  --primary-foreground: oklch(0.1 0.01 260);
+
+  --secondary: oklch(0.2 0.012 260);
+  --secondary-foreground: oklch(0.85 0.005 260);
+  --muted: oklch(0.18 0.01 260);
+  --muted-foreground: oklch(0.6 0.01 260);
+  --accent: oklch(0.72 0.19 55);
+  --accent-foreground: oklch(0.1 0.01 260);
+  --destructive: oklch(0.65 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.25 0.01 260);
+  --input: oklch(0.22 0.01 260);
+  --ring: oklch(0.72 0.19 55);
+
+  --chart-1: oklch(0.72 0.19 55);
+  --chart-2: oklch(0.65 0.15 200);
+  --chart-3: oklch(0.55 0.12 150);
+  --chart-4: oklch(0.6 0.18 30);
+  --chart-5: oklch(0.5 0.1 280);
+
+  --sidebar: oklch(0.13 0.012 260);
+  --sidebar-foreground: oklch(0.96 0.005 260);
+  --sidebar-primary: oklch(0.72 0.19 55);
+  --sidebar-primary-foreground: oklch(0.1 0.01 260);
+  --sidebar-accent: oklch(0.2 0.012 260);
+  --sidebar-accent-foreground: oklch(0.85 0.005 260);
+  --sidebar-border: oklch(0.25 0.01 260);
+  --sidebar-ring: oklch(0.72 0.19 55);
+
+  /* Custom color variables */
+  --amber: oklch(0.72 0.19 55);
+  --amber-dim: oklch(0.55 0.15 55);
+  --teal: oklch(0.72 0.12 195);
+  --surface-1: oklch(0.15 0.012 260);
+  --surface-2: oklch(0.18 0.012 260);
+  --surface-3: oklch(0.22 0.012 260);
+
+  /* Easing */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+
+  ::selection {
+    background-color: oklch(0.72 0.19 55 / 0.35);
+    color: oklch(0.98 0 0);
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 3rem;
+      padding-right: 3rem;
+      max-width: 1100px;
+    }
+  }
+
+  /* Animated link underline */
+  .link-animated {
+    position: relative;
+    text-decoration: none;
+    color: oklch(0.72 0.19 55);
+    transition: color 150ms var(--ease-out);
+  }
+
+  .link-animated::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: oklch(0.72 0.19 55);
+    transition: width 200ms var(--ease-out);
+  }
+
+  .link-animated:hover::after {
+    width: 100%;
+  }
+
+  .link-animated:hover {
+    color: oklch(0.85 0.18 55);
+  }
+
+  /* Section number decoration */
+  .section-number {
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 12vw, 9rem);
+    font-weight: 700;
+    color: oklch(0.72 0.19 55 / 0.07);
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    letter-spacing: -0.04em;
+  }
+
+  /* Amber glow card */
+  .card-glow {
+    background: var(--surface-1);
+    border: 1px solid oklch(0.25 0.01 260);
+    transition: border-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
+  }
+
+  .card-glow:hover {
+    border-color: oklch(0.72 0.19 55 / 0.4);
+    box-shadow: 0 0 24px oklch(0.72 0.19 55 / 0.08);
+  }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 400ms var(--ease-out), transform 400ms var(--ease-out);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Amber separator */
+  .amber-sep {
+    width: 3rem;
+    height: 2px;
+    background: oklch(0.72 0.19 55);
+    border-radius: 2px;
+  }
+
+  /* Noise texture overlay */
+  .noise-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+/* Scroll reveal via IntersectionObserver */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
