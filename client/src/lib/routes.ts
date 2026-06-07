@@ -1,0 +1,16 @@
+export const routes = {
+  home: "/",
+  insaneInfo: "/insane-info",
+  places: "/places",
+  quotes: "/quotes",
+  pamelaDonovan: "/pamela-donovan",
+  blastsFromThePast: "/blasts-from-the-past",
+  dogFood: "/dog-food",
+  jane: "/3jane",
+  lakeviewCemetery: "/lakeview-cemetery",
+  kritters: "/kritters",
+  wackoWeb: "/wacko-web",
+  cleveland2600: "/2600-cleveland",
+  winter: "/winter",
+  icq: "/icq",
+} as const;

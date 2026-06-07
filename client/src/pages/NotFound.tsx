@@ -1,49 +1,51 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle, Home } from "lucide-react";
-import { useLocation } from "wouter";
+import { SiteLayout } from "@/components/SiteLayout";
+import { Home } from "lucide-react";
+import { Link } from "wouter";
 
 export default function NotFound() {
-  const [, setLocation] = useLocation();
-
-  const handleGoHome = () => {
-    setLocation("/");
-  };
-
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
-      <Card className="w-full max-w-lg mx-4 shadow-lg border-0 bg-white/80 backdrop-blur-sm">
-        <CardContent className="pt-8 pb-8 text-center">
-          <div className="flex justify-center mb-6">
-            <div className="relative">
-              <div className="absolute inset-0 bg-red-100 rounded-full animate-pulse" />
-              <AlertCircle className="relative h-16 w-16 text-red-500" />
-            </div>
-          </div>
-
-          <h1 className="text-4xl font-bold text-slate-900 mb-2">404</h1>
-
-          <h2 className="text-xl font-semibold text-slate-700 mb-4">
-            Page Not Found
-          </h2>
-
-          <p className="text-slate-600 mb-8 leading-relaxed">
-            Sorry, the page you are looking for doesn't exist.
-            <br />
-            It may have been moved or deleted.
+    <SiteLayout>
+      <div className="min-h-[70vh] w-full flex items-center justify-center px-4">
+        <div className="text-center max-w-md">
+          <p
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "0.75rem",
+              color: "oklch(0.72 0.19 55)",
+              letterSpacing: "0.15em",
+              marginBottom: "1rem",
+            }}
+          >
+            404
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <h1
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "2rem",
+              fontWeight: 700,
+              color: "oklch(0.97 0.005 260)",
+              marginBottom: "0.75rem",
+            }}
+          >
+            Page Not Found
+          </h1>
+          <p style={{ color: "oklch(0.65 0.01 260)", lineHeight: 1.7, marginBottom: "2rem" }}>
+            Sorry, the page you are looking for doesn't exist. It may have been moved or deleted.
+          </p>
+          <Link href="/">
             <Button
-              onClick={handleGoHome}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
+              style={{
+                background: "oklch(0.72 0.19 55)",
+                color: "oklch(0.1 0.01 260)",
+              }}
             >
               <Home className="w-4 h-4 mr-2" />
               Go Home
             </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+          </Link>
+        </div>
+      </div>
+    </SiteLayout>
   );
 }

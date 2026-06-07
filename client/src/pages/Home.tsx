@@ -6,7 +6,9 @@
  * Layout: coluna única com seções bem espaçadas, números de seção decorativos.
  */
 
+import { routes } from "@/lib/routes";
 import { useEffect, useRef } from "react";
+import { Link } from "wouter";
 
 const storage = (file: string) => `${import.meta.env.BASE_URL}manus-storage/${file}`;
 
@@ -14,6 +16,7 @@ const ECLIPSE_IMG = storage("eclipse_solar_6d48628f.jpg");
 const VCM_PATCH_IMG = storage("vcm_patch_d0c69ed8.jpg");
 const KIT_PHOTO_IMG = storage("kit_photo_96a70f66.jpg");
 const LINUX_LOGO_IMG = storage("linux_logo_4047697a.png");
+const CHOCOLATE_IMG = storage("chocolate_flavour.png");
 
 function useReveal() {
   useEffect(() => {
@@ -347,10 +350,10 @@ function AboutSection() {
                 </h3>
                 <p style={{ color: "oklch(0.75 0.01 260)", lineHeight: 1.8, marginBottom: "1rem" }}>
                   More pics and info about me available on the{" "}
-                  <a href="insane.htm" className="link-animated">Insane Info</a> page.
+                  <Link href={routes.insaneInfo} className="link-animated">Insane Info</Link> page.
                 </p>
-                <a
-                  href="insane.htm"
+                <Link
+                  href={routes.insaneInfo}
                   className="link-animated"
                   style={{
                     fontFamily: "var(--font-display)",
@@ -362,7 +365,7 @@ function AboutSection() {
                   }}
                 >
                   Insane Info →
-                </a>
+                </Link>
               </div>
 
               <div
@@ -386,8 +389,8 @@ function AboutSection() {
                 <p style={{ color: "oklch(0.75 0.01 260)", lineHeight: 1.8, marginBottom: "1rem" }}>
                   A curated list of places and destinations that hold a special place in Kit's heart.
                 </p>
-                <a
-                  href="Places.html"
+                <Link
+                  href={routes.places}
                   className="link-animated"
                   style={{
                     fontFamily: "var(--font-display)",
@@ -399,7 +402,7 @@ function AboutSection() {
                   }}
                 >
                   Explore Places →
-                </a>
+                </Link>
               </div>
 
               <div
@@ -544,9 +547,9 @@ function VeteransSection() {
 
             <p style={{ color: "oklch(0.75 0.01 260)", lineHeight: 1.8 }}>
               While there, read about{" "}
-              <a href="PamelaSynopsis.html" className="link-animated" style={{ fontWeight: 500 }}>
+              <Link href={routes.pamelaDonovan} className="link-animated" style={{ fontWeight: 500 }}>
                 2nd Lt. Pamela Donovan
-              </a>
+              </Link>
               , who gave up her Irish citizenship, became a US citizen and a nurse and volunteered in the US Army Nurse Corp and Viet Nam to help our soldiers.
             </p>
 
@@ -575,66 +578,16 @@ function VeteransSection() {
 
 function ExploreSection() {
   const links = [
-    {
-      title: "Kit's Collection of Quotes",
-      desc: "A personal collection of memorable and meaningful quotes gathered over the years.",
-      href: "quotes.htm",
-      tag: "QUOTES",
-    },
-    {
-      title: "Blasts From The Past",
-      desc: "Check out the following from days gone by.",
-      href: "BlastPast.html",
-      tag: "NOSTALGIA",
-    },
-    {
-      title: "Dog Food?",
-      desc: "A curious page from Kit's collection of oddities.",
-      href: "DogFood.html",
-      tag: "WEIRD",
-    },
-    {
-      title: "3jane — My Sugar Glider",
-      desc: "Meet 3jane, Kit's beloved sugar glider.",
-      href: "3jane.htm",
-      tag: "PETS",
-    },
-    {
-      title: "Lakeview Cemetery",
-      desc: "Pics of wonderful Lakeview Cemetery, one of my homes away from home. (8-12-99)",
-      href: "lakeview/lakeview.html",
-      tag: "PHOTOGRAPHY",
-    },
-    {
-      title: "Kritters",
-      desc: "Visit the Kritters page and see mine and my friend's pets.",
-      href: "kritters/kritters.html",
-      tag: "PETS",
-    },
-    {
-      title: "Wacko Web Sights I Like",
-      desc: "Including some of my friends pages. (Caution, they are no more normal than I am!)",
-      href: "wackoweb.htm",
-      tag: "LINKS",
-    },
-    {
-      title: "2600 Cleveland",
-      desc: "Please visit the 2600 Cleveland website.",
-      href: "2600",
-      tag: "TECH",
-    },
-    {
-      title: "THIS is why I HATE winter",
-      desc: "This is why I HATE winter in Cleveland, Ohio. (Winter, 1999)",
-      href: "winter.html",
-      tag: "CLEVELAND",
-    },
-    {
-      title: "ICQ Me?",
-      desc: "Page me, Email me, etc. via ICQ. Learn more about ICQ here also.",
-      href: "icq.htm",
-      tag: "CONTACT",
-    },
+    { title: "Kit's Collection of Quotes", desc: "A personal collection of memorable and meaningful quotes gathered over the years.", href: routes.quotes, tag: "QUOTES" },
+    { title: "Blasts From The Past", desc: "Check out the following from days gone by.", href: routes.blastsFromThePast, tag: "NOSTALGIA" },
+    { title: "Dog Food?", desc: "A curious page from Kit's collection of oddities.", href: routes.dogFood, tag: "WEIRD" },
+    { title: "3jane — My Sugar Glider", desc: "Meet 3jane, Kit's beloved sugar glider.", href: routes.jane, tag: "PETS" },
+    { title: "Lakeview Cemetery", desc: "Pics of wonderful Lakeview Cemetery, one of my homes away from home. (8-12-99)", href: routes.lakeviewCemetery, tag: "PHOTOGRAPHY" },
+    { title: "Kritters", desc: "Visit the Kritters page and see mine and my friend's pets.", href: routes.kritters, tag: "PETS" },
+    { title: "Wacko Web Sights I Like", desc: "Including some of my friends pages. (Caution, they are no more normal than I am!)", href: routes.wackoWeb, tag: "LINKS" },
+    { title: "2600 Cleveland", desc: "Please visit the 2600 Cleveland website.", href: routes.cleveland2600, tag: "TECH" },
+    { title: "THIS is why I HATE winter", desc: "This is why I HATE winter in Cleveland, Ohio. (Winter, 1999)", href: routes.winter, tag: "CLEVELAND" },
+    { title: "ICQ Me?", desc: "Page me, Email me, etc. via ICQ. Learn more about ICQ here also.", href: routes.icq, tag: "CONTACT" },
   ];
 
   return (
@@ -672,7 +625,7 @@ function ExploreSection() {
           }}
         >
           {links.map((link, i) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="reveal card-glow"
@@ -747,7 +700,7 @@ function ExploreSection() {
                   <path d="M2.5 6H9.5M6.5 3L9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
@@ -789,48 +742,67 @@ function ChocolateQuiz() {
           </p>
           <div
             style={{
-              padding: "2.5rem",
+              padding: "2rem",
               background: "oklch(0.15 0.012 260)",
               border: "1px solid oklch(0.72 0.19 55 / 0.25)",
               borderRadius: "0.75rem",
               boxShadow: "0 0 40px oklch(0.72 0.19 55 / 0.06)",
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "1.75rem",
+              alignItems: "center",
+              textAlign: "left",
             }}
           >
-            <h3
+            <img
+              src={CHOCOLATE_IMG}
+              alt="I am Chocolate Flavoured"
               style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "1.75rem",
-                fontWeight: 700,
-                color: "oklch(0.72 0.19 55)",
-                letterSpacing: "-0.02em",
-                marginBottom: "1.25rem",
+                width: "140px",
+                height: "140px",
+                flexShrink: 0,
+                objectFit: "cover",
+                borderRadius: "0.5rem",
+                border: "1px solid oklch(0.72 0.19 55 / 0.2)",
               }}
-            >
-              I am Chocolate Flavoured.
-            </h3>
-            <p
-              style={{
-                color: "oklch(0.75 0.01 260)",
-                lineHeight: 1.85,
-                fontSize: "1rem",
-                marginBottom: "1.5rem",
-              }}
-            >
-              I am sweet and a little bit naughty. I am one of the few clinically proven aphrodisiacs. Sometimes I can seem a little hard, but show warmth and I soon melt.
-            </p>
-            <a
-              href="https://www.whatflavourareyou.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link-animated"
-              style={{
-                fontFamily: "var(--font-display)",
-                fontWeight: 600,
-                fontSize: "0.9rem",
-              }}
-            >
-              What Flavour Are You? →
-            </a>
+            />
+            <div style={{ flex: "1 1 240px", minWidth: 0 }}>
+              <h3
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "1.75rem",
+                  fontWeight: 700,
+                  color: "oklch(0.72 0.19 55)",
+                  letterSpacing: "-0.02em",
+                  marginBottom: "1.25rem",
+                }}
+              >
+                I am Chocolate Flavoured.
+              </h3>
+              <p
+                style={{
+                  color: "oklch(0.75 0.01 260)",
+                  lineHeight: 1.85,
+                  fontSize: "1rem",
+                  marginBottom: "1.5rem",
+                }}
+              >
+                I am sweet and a little bit naughty. I am one of the few clinically proven aphrodisiacs. Sometimes I can seem a little hard, but show warmth and I soon melt.
+              </p>
+              <a
+                href="https://www.whatflavourareyou.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-animated"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 600,
+                  fontSize: "0.9rem",
+                }}
+              >
+                What Flavour Are You? →
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -978,8 +950,8 @@ function ContactSection() {
               kit@kitty.org
             </a>
 
-            <a
-              href="icq.htm"
+            <Link
+              href={routes.icq}
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -1007,7 +979,7 @@ function ContactSection() {
               }}
             >
               ICQ Me?
-            </a>
+            </Link>
           </div>
         </div>
       </div>
