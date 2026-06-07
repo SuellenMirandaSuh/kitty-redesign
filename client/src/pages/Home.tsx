@@ -1094,7 +1094,7 @@ function Footer() {
               backdropFilter: "blur(6px)",
             }}
           >
-            Design de interface e UX por Suelen Miranda
+            Design de interface e UX por Suellen Miranda
             <span style={{ margin: "0 0.4rem", color: "oklch(0.48 0.04 300 / 0.6)" }}>·</span>
             <a
               href="https://linkedin.com/in/suellenmiranda"
