@@ -8,11 +8,12 @@
 
 import { useEffect, useRef } from "react";
 
-// Imagens hospedadas no CDN
-const ECLIPSE_IMG = "/manus-storage/eclipse_solar_6d48628f.webp";
-const VCM_PATCH_IMG = "/manus-storage/vcm_patch_d0c69ed8.webp";
-const KIT_PHOTO_IMG = "/manus-storage/kit_photo_96a70f66.jpg";
-const LINUX_LOGO_IMG = "/manus-storage/linux_logo_4047697a.png";
+const storage = (file: string) => `${import.meta.env.BASE_URL}manus-storage/${file}`;
+
+const ECLIPSE_IMG = storage("eclipse_solar_6d48628f.jpg");
+const VCM_PATCH_IMG = storage("vcm_patch_d0c69ed8.jpg");
+const KIT_PHOTO_IMG = storage("kit_photo_96a70f66.jpg");
+const LINUX_LOGO_IMG = storage("linux_logo_4047697a.png");
 
 function useReveal() {
   useEffect(() => {
@@ -1022,6 +1023,7 @@ function Footer() {
     "October 2, 2011",
     "February 15, 2012",
     "March 20, 2023",
+    "Month day, 2026",
   ];
 
   return (
@@ -1101,6 +1103,55 @@ function Footer() {
               ))}
             </div>
           </div>
+        </div>
+
+        <div style={{ marginTop: "2rem", textAlign: "center" }}>
+          <p
+            style={{
+              display: "inline-block",
+              margin: 0,
+              padding: "0.5rem 1rem",
+              textAlign: "center",
+              color: "oklch(0.58 0.03 300)",
+              fontFamily: "var(--font-mono)",
+              fontSize: "0.7rem",
+              lineHeight: 1.7,
+              background: "oklch(0.45 0.08 300 / 0.08)",
+              border: "1px solid oklch(0.5 0.08 300 / 0.2)",
+              borderRadius: "0.375rem",
+              backdropFilter: "blur(6px)",
+            }}
+          >
+            Design de interface e UX por Suelen Miranda
+            <span style={{ margin: "0 0.4rem", color: "oklch(0.48 0.04 300 / 0.6)" }}>·</span>
+            <a
+              href="https://linkedin.com/in/suellenmiranda"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "inherit", textDecoration: "none" }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.textDecoration = "underline";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.textDecoration = "none";
+              }}
+            >
+              LinkedIn
+            </a>
+            <span style={{ margin: "0 0.4rem", color: "oklch(0.48 0.04 300 / 0.6)" }}>·</span>
+            <a
+              href="mailto:suellen.dsredev@gmail.com"
+              style={{ color: "inherit", textDecoration: "none" }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.textDecoration = "underline";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.textDecoration = "none";
+              }}
+            >
+              E-mail
+            </a>
+          </p>
         </div>
       </div>
     </footer>

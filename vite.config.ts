@@ -150,6 +150,38 @@ function vitePluginManusDebugCollector(): Plugin {
   };
 }
 
+const LOCAL_STORAGE_DIR = path.join(PROJECT_ROOT, "client", "public", "manus-storage");
+
+const STORAGE_MIME: Record<string, string> = {
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".webp": "image/webp",
+  ".png": "image/png",
+};
+
+function resolveLocalStoragePath(key: string): string | null {
+  const candidates = [key.split("?")[0]];
+  const base = candidates[0];
+  if (base.endsWith(".webp")) {
+    candidates.push(base.replace(/\.webp$/, ".jpg"));
+  }
+  for (const name of candidates) {
+    const filePath = path.join(LOCAL_STORAGE_DIR, name);
+    if (fs.existsSync(filePath)) return filePath;
+  }
+  return null;
+}
+
+function serveLocalStorageFile(key: string, res: import("http").ServerResponse): boolean {
+  const filePath = resolveLocalStoragePath(key);
+  if (!filePath) return false;
+
+  const ext = path.extname(filePath).toLowerCase();
+  res.writeHead(200, { "Content-Type": STORAGE_MIME[ext] || "application/octet-stream" });
+  fs.createReadStream(filePath).pipe(res);
+  return true;
+}
+
 function vitePluginStorageProxy(): Plugin {
   return {
     name: "manus-storage-proxy",
@@ -166,8 +198,9 @@ function vitePluginStorageProxy(): Plugin {
         const forgeKey = process.env.BUILT_IN_FORGE_API_KEY;
 
         if (!forgeBaseUrl || !forgeKey) {
-          res.writeHead(500, { "Content-Type": "text/plain" });
-          res.end("Storage proxy not configured");
+          if (serveLocalStorageFile(key, res)) return;
+          res.writeHead(404, { "Content-Type": "text/plain" });
+          res.end("Storage file not found");
           return;
         }
 
@@ -205,7 +238,8 @@ function vitePluginStorageProxy(): Plugin {
 
 const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+  base: mode === "pages" ? "/kitty-redesign/" : "/",
   plugins,
   resolve: {
     alias: {
@@ -238,4 +272,4 @@ export default defineConfig({
       deny: ["**/.*"],
     },
   },
-});
+}));
